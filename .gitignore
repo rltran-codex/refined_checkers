@@ -4,10 +4,18 @@ gradle/*
 gradlew
 gradlew.bat
 settings.gradle
+**/bin
 
 # Ignore Gradle build output directory
 build
 
+# Enviornments
+.env
+*.env
+
 # IDE
 .vscode
 idea
+
+# Misc
+ref_board.png
