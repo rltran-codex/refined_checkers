@@ -15,8 +15,8 @@ A classic two-player board game with specific rules for moving and capturing pie
       - For player o, pieces occupy rows 6-8
 
 <div style="text-align:center">
-  ![Capturing Example](./markdown_images/CheckerBoard.jpg)
-  <p>Figure 1 displays the board with both Algebraic Notation coordinates and 2D Matrices coordinates.</p>
+  <img src="./markdown_images/CheckerBoard.jpg" alt="Checker Board"/>
+  <p>Figure 1: Board with one in Algebraic Notation coordinates and antoher in 2D Matrices coordinates.</p>
 </div>
 
 
@@ -26,15 +26,29 @@ A classic two-player board game with specific rules for moving and capturing pie
     - When a piece reaches the opponent's back row (row 8 for x, row 1 for o), the piece shall be promoted to a King piece.
     - Kinged pieces shall be able move one square diagonally forward and backward.
 
+<div style="text-align:center">
+  <img src="./markdown_images/PieceMovement.jpg" alt="Piece's Movement"/>
+  <p>Figure 2: Piece movement</p>
+
+  <img src="./markdown_images/KingPieceMovement.jpg" alt="King's Movement">
+  <p>Figure 3: Kinged piece movement</p>
+</div>
+
 3. Capturing
     - A piece shall capture an opponent's piece by jumping over it diagonally forward if the space is unoccupied.
     - A piece shall perform multiple captures in a single turn as long as the jumps are consecutive.
     - A piece that performs a capture shall be placed in the square immediately beyond the captured piece.
+    - A player shall be given a choice to choose between capturing a piece or simply moving a piece.
 
 <div style="text-align:center">
-  ![Capturing Example](./markdown_images/CapturingExample.jpg)
-  <p>Figure 2: Capturing Example</p>
+  <img src="./markdown_images/CapturingExample.jpg" alt="Capturing Example"/>
+  <p>Figure 4: Capturing Example</p>
 </div>
+
+3. Ending the Game
+    - The game is won when one player captures all of the opponent's pieces or when an opponent cannot make any legal moves.
+    - If neither player can make a legal move, the game ends in a draw or a stalemate.
+
 
 
 # Design
