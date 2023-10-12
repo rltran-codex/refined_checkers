@@ -75,10 +75,12 @@ public class CheckerPiece implements PieceSubscriber, Serializable {
     calculateJumps();
   }
 
+  @Override
   public ArrayList<Integer[]> getPossibleMoves() {
     return this.next_moves;
   }
 
+  @Override
   public ArrayList<Integer[]> getPossibleJumps() {
     return this.next_jumps;
   }
