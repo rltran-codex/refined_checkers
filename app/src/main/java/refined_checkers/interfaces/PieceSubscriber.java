@@ -1,7 +1,6 @@
 package refined_checkers.interfaces;
 
 import refined_checkers.game_logic.Board;
-import refined_checkers.models.CheckerPiece;
 
 /**
  * PieceSubscriber Interface defines the methods

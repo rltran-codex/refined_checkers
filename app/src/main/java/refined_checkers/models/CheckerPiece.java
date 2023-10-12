@@ -1,7 +1,6 @@
 package refined_checkers.models;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.io.Serializable;
 
 import refined_checkers.game_logic.Board;
@@ -106,7 +105,6 @@ public class CheckerPiece implements PieceSubscriber, Serializable {
       return false;
     }
 
-    int space_diff = Math.abs(cInit - cDest);
     // If move distance is 1 and space is available, then return true.
     if (Math.abs(cInit - cDest) == 1 && ref_board[rDest][cDest] == null) {
       return true;
@@ -171,32 +169,6 @@ public class CheckerPiece implements PieceSubscriber, Serializable {
         list.add(move_bck_rght);
       }
     }
-  }
-
-  private boolean validateMove(Integer[] pos) {
-    if (pos == null) {
-      return false;
-    }
-
-    for (Integer[] m : next_moves) {
-      int r = m[0];
-      int c = m[0];
-
-      if (r == pos[0] && c == pos[1]) {
-        return true;
-      }
-    }
-
-    for (Integer[] m : next_jumps) {
-      int r = m[0];
-      int c = m[0];
-
-      if (r == pos[0] && c == pos[1]) {
-        return true;
-      }
-    }
-
-    return false;
   }
 
   public void kingMe() {
