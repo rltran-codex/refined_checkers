@@ -12,7 +12,13 @@ import refined_checkers.models.CheckerPiece;
  */
 public interface PieceSubscriber {
 
+  /**
+   * Getter method to retrieve name of the current piece.
+   * 
+   * @return
+   */
   public String getName();
+
   /**
    * calculateMoves method checks the available moves current piece
    * can make. Updates possible_moves attribute.
