@@ -15,9 +15,9 @@ A classic two-player board game with specific rules for moving and capturing pie
       - For player o, pieces occupy rows 6-8
 
 <p align="center">
-  <img src="./markdown_images/CheckerBoard.jpg" alt="Checker Board"/>
+  <img src="./markdown_images/BoardSetup.jpg" alt="Checker Board"/>
 </p>
-<p align="center">Figure 1: Board with one in Algebraic Notation coordinates and antoher in 2D Matrices coordinates.</p>
+<p align="center">Figure 1: Example of how the Board would be set up where the white pieces are O and dark pieces are X.</p>
 
 
 2. Piece Movement

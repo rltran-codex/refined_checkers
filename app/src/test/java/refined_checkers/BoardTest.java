@@ -70,8 +70,8 @@ public class BoardTest {
   public void testPiecePlacements() {
     try {
       Board b = bBuilder.setGameType(GameType.CHECKERS)
-        .setBoard()
-        .build();
+          .setBoard()
+          .build();
 
       PieceSubscriber[][] checkerBoard = b.getBoard();
       for (int c = 0; c < checkerBoard.length; c++) {
@@ -95,14 +95,14 @@ public class BoardTest {
   public void testPieceCalculations() {
     try {
       Board b = bBuilder.setGameType(GameType.CHECKERS)
-        .setBoard()
-        .build();
+          .setBoard()
+          .build();
 
       CheckerPiece p = (CheckerPiece) b.getBoard()[2][7];
       ArrayList<Integer[]> t = p.getPossibleMoves();
       assertEquals(1, t.size());
       assertEquals("o", p.getName());
-      assertArrayEquals(new Integer[] {3, 6}, t.get(0));
+      assertArrayEquals(new Integer[] { 3, 6 }, t.get(0));
     } catch (Exception e) {
       // TODO: handle exception
       fail();
@@ -130,23 +130,17 @@ public class BoardTest {
     assertEquals(1, p2.getPossibleJumps().size());
     assertEquals(1, p3.getPossibleJumps().size());
 
-    ArrayList<Integer[]> expected_x = new ArrayList<>(){{
-      add(new Integer[] { 2, 3 });
-    }};
-
     assertArrayEquals(new Integer[] { 5, 0 }, p1.getPossibleJumps().get(0));
     assertArrayEquals(new Integer[] { 5, 4 }, p1.getPossibleJumps().get(1));
   }
-
 
   @Test
   public void testKingCalculations() {
     Board b = new Board();
     CheckerPiece p1 = new CheckerPiece("o", 3, 2);
-     p1.kingMe();
+    p1.kingMe();
     CheckerPiece p2 = new CheckerPiece("x", 2, 3);
     CheckerPiece p3 = new CheckerPiece("x", 4, 1);
-
 
     CheckerPiece[][] testBoard = new CheckerPiece[8][8];
     testBoard[3][2] = p1;
@@ -161,10 +155,10 @@ public class BoardTest {
     assertEquals(2, possibleMoves.size());
     assertEquals(2, possibleJumps.size());
 
-    assertArrayEquals(new Integer[]{ 4, 3 }, possibleMoves.get(0));
-    assertArrayEquals(new Integer[]{ 2, 1 }, possibleMoves.get(1));
+    assertArrayEquals(new Integer[] { 4, 3 }, possibleMoves.get(0));
+    assertArrayEquals(new Integer[] { 2, 1 }, possibleMoves.get(1));
 
-    assertArrayEquals(new Integer[]{ 5, 0 }, possibleJumps.get(0));
-    assertArrayEquals(new Integer[]{ 1, 4 }, possibleJumps.get(1));
+    assertArrayEquals(new Integer[] { 5, 0 }, possibleJumps.get(0));
+    assertArrayEquals(new Integer[] { 1, 4 }, possibleJumps.get(1));
   }
 }
