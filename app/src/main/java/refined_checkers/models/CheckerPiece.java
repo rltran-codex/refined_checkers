@@ -41,26 +41,19 @@ public class CheckerPiece implements PieceSubscriber, Serializable {
     if (ref_board == null) {
       throw new NullPointerException("Reference to board is missing...");
     }
-
-    analyzingBoard(1, MoveType.SIMPLE);
-
-    if (isKing) {
-      // todo
-    }
+    this.next_moves = new ArrayList<>();
+    
+    analyzingBoard(1, next_moves);
   }
 
   @Override
   public void calculateJumps() {
-    // TODO Auto-generated method stub
     if (ref_board == null) {
       throw new NullPointerException("Reference to board is missing...");
     }
 
-    analyzingBoard(2, MoveType.JUMP);
-
-    if (isKing) {
-
-    }
+    this.next_jumps = new ArrayList<>();
+    analyzingBoard(2, next_jumps);
   }
 
   @Override
@@ -76,9 +69,6 @@ public class CheckerPiece implements PieceSubscriber, Serializable {
   @Override
   public void update(PieceSubscriber[][] board) {
     this.ref_board = board;
-    // reset jumps for next calculation
-    this.next_moves = new ArrayList<>();
-    this.next_jumps = new ArrayList<>();
 
     // calculate moves
     calculateMoves();
@@ -116,13 +106,12 @@ public class CheckerPiece implements PieceSubscriber, Serializable {
       return false;
     }
 
+    int space_diff = Math.abs(cInit - cDest);
     // If move distance is 1 and space is available, then return true.
     if (Math.abs(cInit - cDest) == 1 && ref_board[rDest][cDest] == null) {
       return true;
     }
 
-    // If move distance is 2, destination space is available, and space in 
-    // between is occupied by opponent, then retrun true
     if (Math.abs(cInit - cDest) == 2 && ref_board[rDest][cDest] == null) {
       CheckerPiece p = (CheckerPiece) ref_board[(rInit + rDest) / 2][(cInit + cDest) / 2];
       if (p == null) {
@@ -139,7 +128,7 @@ public class CheckerPiece implements PieceSubscriber, Serializable {
     return false;
   }
 
-  private void analyzingBoard(int n, MoveType type) {
+  private void analyzingBoard(int n, ArrayList<Integer[]> list) {
     int x_row = -1;
     int x_col_left = col - n;
     int x_col_rght = col + n;
@@ -156,26 +145,61 @@ public class CheckerPiece implements PieceSubscriber, Serializable {
     Integer[] move_fwd_left = new Integer[] { x_row, x_col_left };
     Integer[] move_fwd_rght = new Integer[] { x_row, x_col_rght };
 
-    // If moving diagonal left is valid, add to available moves
     if (validateMove(curr_pos, move_fwd_left)) {
-      if (type == MoveType.SIMPLE) {
-        next_moves.add(move_fwd_left);
-      } else if (type == MoveType.JUMP) {
-        next_jumps.add(move_fwd_left);
-      }
+      list.add(move_fwd_left);
     }
 
     if (validateMove(curr_pos, move_fwd_rght)) {
-      if (type == MoveType.SIMPLE) {
-        next_moves.add(move_fwd_rght);
-      } else if (type == MoveType.JUMP) {
-        next_jumps.add(move_fwd_rght);
+      list.add(move_fwd_rght);
+    }
+
+    if (isKing) {
+      if (this.name.equals("x")) {
+        x_row = row + n;
+      } else if (this.name.equals("o")) {
+        x_row = row - n;
+      }
+
+      Integer[] move_bck_left = new Integer[] { x_row, x_col_left };
+      Integer[] move_bck_rght = new Integer[] { x_row, x_col_rght };
+
+      if (validateMove(getCoordinates(), move_bck_left)) {
+        list.add(move_bck_left);
+      }
+
+      if (validateMove(getCoordinates(), move_bck_rght)) {
+        list.add(move_bck_rght);
       }
     }
   }
 
-  private enum MoveType {
-    JUMP,
-    SIMPLE
+  private boolean validateMove(Integer[] pos) {
+    if (pos == null) {
+      return false;
+    }
+
+    for (Integer[] m : next_moves) {
+      int r = m[0];
+      int c = m[0];
+
+      if (r == pos[0] && c == pos[1]) {
+        return true;
+      }
+    }
+
+    for (Integer[] m : next_jumps) {
+      int r = m[0];
+      int c = m[0];
+
+      if (r == pos[0] && c == pos[1]) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  public void kingMe() {
+    this.isKing = true;
   }
 }

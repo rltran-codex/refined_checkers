@@ -137,4 +137,34 @@ public class BoardTest {
     assertArrayEquals(new Integer[] { 5, 0 }, p1.getPossibleJumps().get(0));
     assertArrayEquals(new Integer[] { 5, 4 }, p1.getPossibleJumps().get(1));
   }
+
+
+  @Test
+  public void testKingCalculations() {
+    Board b = new Board();
+    CheckerPiece p1 = new CheckerPiece("o", 3, 2);
+     p1.kingMe();
+    CheckerPiece p2 = new CheckerPiece("x", 2, 3);
+    CheckerPiece p3 = new CheckerPiece("x", 4, 1);
+
+
+    CheckerPiece[][] testBoard = new CheckerPiece[8][8];
+    testBoard[3][2] = p1;
+    testBoard[2][3] = p2;
+    testBoard[4][1] = p3;
+
+    b.updateBoard(testBoard);
+
+    ArrayList<Integer[]> possibleMoves = p1.getPossibleMoves();
+    ArrayList<Integer[]> possibleJumps = p1.getPossibleJumps();
+
+    assertEquals(2, possibleMoves.size());
+    assertEquals(2, possibleJumps.size());
+
+    assertArrayEquals(new Integer[]{ 4, 3 }, possibleMoves.get(0));
+    assertArrayEquals(new Integer[]{ 2, 1 }, possibleMoves.get(1));
+
+    assertArrayEquals(new Integer[]{ 5, 0 }, possibleJumps.get(0));
+    assertArrayEquals(new Integer[]{ 1, 4 }, possibleJumps.get(1));
+  }
 }
